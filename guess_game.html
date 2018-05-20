@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Угадай число</title>
+  <link rel="stylesheet" href="./css/guess_game.css">
+</head>
+
+<body>
+
+  <section class="start-block">
+    <h3 class="greeting">Привет!</h3>
+    <p class="start-text">
+      Сыграем в игру? Все очень просто &mdash; задай верхнюю границу диапазона и я загадаю число
+      <span class="no-break">от 1</span>
+      <span class="no-break upper-limit-text">до placeholder.</span>
+      У тебя будет несколько попыток, чтобы угадать.
+    </p>
+    <div class="input-wrapper remove-space">
+      <label class="input-group left-label" for="upper-limit">Верхняя граница диапазона</label>
+      <input class="input-group right-input" id="upper-limit" type="number" min="2" step="1" max="50000" placeholder="введи число" value="50">
+    </div>
+    <small class="error-message error-hidden">Целое число от 2 до</small>
+    <button class="btn start-btn" type="button">Загадать</button>
+
+  </section>
+
+  <!-- ------------------------------------------------------------ -->
+
+  <section class="game-block transparent hide">
+    <div class="pic-block">
+      <img class="pic" src="./images/cat-thinker.jpg" alt="Кот">
+    </div>
+
+    <p class="prompting-text">Я загадал! У тебя есть несколько попыток.</p>
+    <p class="left-attempts">Осталось попыток: 100500</p>
+
+    <div class="input-wrapper remove-space user-guess-wrapper">
+      <label class="input-group left-label" for="user-guess">Твоя догадка</label>
+      <input class="input-group right-input" id="user-guess" type="number" min="1" step="1" placeholder="введи число">
+    </div>
+    <small class="error-message guess-error error-hidden">Целое число от 1 до</small>
+    <button class="btn guess-btn" type="button">Мне повезет</button>
+    <button class="btn restart-btn hide" type="button">Еще раз</button>
+  </section>
+
+
+  <script src="./js/guess_game.js"></script>
+</body>
+
+</html>
