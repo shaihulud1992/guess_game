@@ -3,12 +3,12 @@ const LOWER_LIMIT = 1;
 const UPPER_LIMIT = 100;
 const UPPER_LIMIT_MAX = 10000;
 
-let upperLimitInput = document.getElementById('upper-limit');
-let upperLimitMax = isValid(upperLimitInput.max, LOWER_LIMIT + 1, Infinity) ?
+const upperLimitInput = document.getElementById('upper-limit');
+const upperLimitMax = isValid(upperLimitInput.max, LOWER_LIMIT + 1, Infinity) ?
   +upperLimitInput.max : UPPER_LIMIT_MAX;
 console.log('Max possible upper limit is: ' + upperLimitMax);
 
-let errorMessage = document.getElementsByClassName('error-message')[0];
+const errorMessage = document.getElementsByClassName('error-message')[0];
 errorMessage.textContent += ' ' + upperLimitMax;
 
 let upperLimit;
@@ -18,10 +18,10 @@ if (isValid(upperLimitInput.value, LOWER_LIMIT + 1, upperLimitMax)) {
   upperLimitInput.value = upperLimit = UPPER_LIMIT;
 }
 
-let upperLimitText = document.getElementsByClassName('upper-limit-text')[0];
+const upperLimitText = document.getElementsByClassName('upper-limit-text')[0];
 upperLimitText.textContent = 'до ' + upperLimit + '.';
 
-let startBtn = document.getElementsByClassName('start-btn')[0];
+const startBtn = document.getElementsByClassName('start-btn')[0];
 
 upperLimitInput.addEventListener('input', function () {
   if (isValid(this.value, LOWER_LIMIT + 1, upperLimitMax)) {
@@ -39,12 +39,12 @@ upperLimitInput.addEventListener('input', function () {
   }
 });
 
-let startBlock = document.getElementsByClassName('start-block')[0];
+const startBlock = document.getElementsByClassName('start-block')[0];
 let game;
-let userGuessInput = document.getElementById('user-guess');
-let guessError = document.getElementsByClassName('guess-error')[0];
-let leftAttempts = document.getElementsByClassName('left-attempts')[0];
-let guessBtn = document.getElementsByClassName('guess-btn')[0];
+const userGuessInput = document.getElementById('user-guess');
+const guessError = document.getElementsByClassName('guess-error')[0];
+const leftAttempts = document.getElementsByClassName('left-attempts')[0];
+const guessBtn = document.getElementsByClassName('guess-btn')[0];
 
 startBtn.addEventListener('click', function () {
   if (this.hasAttribute('disabled')) return;
@@ -66,22 +66,21 @@ startBtn.addEventListener('click', function () {
 
 });
 
-let gameBlock = document.getElementsByClassName('game-block')[0];
+const gameBlock = document.getElementsByClassName('game-block')[0];
 startBlock.addEventListener('transitionend', function (event) {
-  if (this === event.target) {
-    this.classList.add('hide');
-    console.log('Start-block trasition finished. Class .hide added to start-block');
+  if (this !== event.target) return;
 
-    gameBlock.classList.remove('hide');
-    console.log('Class .hide removed from game-block');
+  this.classList.add('hide');
+  console.log('Start-block trasition finished. Class .hide added to start-block');
 
-    //костыль? без setTimeout не происходит плавного появления
-    setTimeout(function () {
-      gameBlock.classList.remove('transparent');
-      console.log('Class .transparent removed from game-block');
-    }, 0);
+  gameBlock.classList.remove('hide');
+  console.log('Class .hide removed from game-block');
 
-  }
+  // без setTimeout не происходит плавного появления
+  setTimeout(function () {
+    gameBlock.classList.remove('transparent');
+    console.log('Class .transparent removed from game-block');
+  }, 0);
 });
 
 userGuessInput.addEventListener('input', function () {
@@ -99,9 +98,9 @@ userGuessInput.addEventListener('input', function () {
   }
 });
 
-let promptingText = document.getElementsByClassName('prompting-text')[0];
-let pic = document.getElementsByClassName('pic')[0];
-let restartBtn = document.getElementsByClassName('restart-btn')[0];
+const promptingText = document.getElementsByClassName('prompting-text')[0];
+const pic = document.getElementsByClassName('pic')[0];
+const restartBtn = document.getElementsByClassName('restart-btn')[0];
 guessBtn.addEventListener('click', function () {
   if (this.hasAttribute('disabled')) return;
 
@@ -141,9 +140,6 @@ guessBtn.addEventListener('click', function () {
       promptingText.textContent = 'Ха-ха \u2014 не угадал! Загаданное число меньше.'
       pic.setAttribute('src', randPath);
       break;
-
-    default:
-      break;
   }
 });
 
@@ -165,7 +161,7 @@ function randInt(min, max) {
 function Game(lowerLimit, upperLimit) {
   console.log('Game function called');
 
-  let secret = randInt(lowerLimit, upperLimit);
+  const secret = randInt(lowerLimit, upperLimit);
   let numOfAttempts = Math.ceil(Math.log(upperLimit - lowerLimit + 1) / Math.LN2);
 
   console.log('Secret number generated: ' + secret);
